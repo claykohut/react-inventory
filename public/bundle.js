@@ -66,7 +66,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var initialUser = { name: '' };
+	var initialUser = {
+	  name: '',
+	  brand: ''
+	};
 
 	// const formStore = createStore(combineForms({
 	//   user: initialUser,
@@ -38230,7 +38233,7 @@
 	      id: uid(),
 	      isDone: false,
 	      text: item.text,
-	      price: parseInt(item.price),
+	      price: parseFloat(item.price),
 	      quantity: parseInt(item.qty)
 	    }
 	  };
@@ -38302,9 +38305,8 @@
 
 	  var handleSubmit = function handleSubmit(val) {
 	    // Do anything you want with the form value
-	    console.log(val, ' brand ', val.brand);
-	    console.log('reset form? ', resetForm);
 	    // console.log('submit this ', this)
+
 	    addItem({
 	      text: val.name,
 	      brand: val.brand,

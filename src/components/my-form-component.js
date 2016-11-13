@@ -10,9 +10,8 @@ export function MainForm(props) {
 
   const handleSubmit = function(val){
     // Do anything you want with the form value
-    console.log(val, ' brand ', val.brand);
-    console.log('reset form? ', resetForm)
    // console.log('submit this ', this)
+
     addItem({ 
       text: val.name,
       brand: val.brand,

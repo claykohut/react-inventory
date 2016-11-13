@@ -8,7 +8,10 @@ import reducer from './reducer';
 import { InventoryList, MainForm } from './containers';
 
 
-const initialUser = { name: '' };
+const initialUser = { 
+  name: '',
+  brand: ''
+};
 
 // const formStore = createStore(combineForms({
 //   user: initialUser,
