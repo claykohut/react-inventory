@@ -14,6 +14,19 @@ export function addTodo(text) {
   };
 }
 
+export function addItem(item) {
+  return {
+    type: 'ADD_ITEM',
+    payload: {
+      id: uid(),
+      isDone: false,
+      text: item.text,
+      price: item.price,
+      quantity: item.qty
+    }
+  };
+}
+
 export function toggleTodo(id) {
   return {
     type: 'TOGGLE_TODO',

@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import { Control, Form } from 'react-redux-form';
 
 export function MainForm(props) {
-  const { todos, toggleTodo, addTodo, removeTodo, increaseQty, decreaseQty } = props;
+
+ // console.log('form props ', props)
+
+  const { addItem } = props;
 
   const handleSubmit = function(val){
     // Do anything you want with the form value
     console.log(val, ' brand ', val.brand);
-    console.log('submit event')
-    addTodo(val.name + ' ' + val.brand);
+    console.log('submit this ', this)
+    addItem({ 
+      text: val.name,
+      brand: val.brand,
+      price: val.price,
+      qty: val.qty
+    });
   }
 
   const onSubmit = (event) => {
@@ -30,7 +38,10 @@ export function MainForm(props) {
       <label>Your name?</label>
       <Control.text model="form.user.name" />
       <Control.text model="form.user.brand" />
+      <Control.text model="form.user.price" />
+      <Control.text model="form.user.qty" />
       <button>Submit!</button>
+
     </Form>
   );
 }

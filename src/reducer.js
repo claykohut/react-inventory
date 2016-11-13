@@ -48,6 +48,9 @@ export default function(todos=init, action) {
 				return t;
 			}
 		})
+	case 'ADD_ITEM':
+		console.log('adding item.. ', action.payload)
+		return todos.push(Map(action.payload));
     default:
 	    console.log('doing default action..')
       return todos;

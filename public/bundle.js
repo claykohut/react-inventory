@@ -32997,6 +32997,9 @@
 						return t;
 					}
 				});
+			case 'ADD_ITEM':
+				console.log('adding item.. ', action.payload);
+				return todos.push((0, _immutable.Map)(action.payload));
 			default:
 				console.log('doing default action..');
 				return todos;
@@ -38046,20 +38049,8 @@
 	  return { form: state.form };
 	}, function mapDispatchToProps(dispatch) {
 	  return {
-	    addTodo: function addTodo(text) {
-	      return dispatch((0, _actions.addTodo)(text));
-	    },
-	    toggleTodo: function toggleTodo(id) {
-	      return dispatch((0, _actions.toggleTodo)(id));
-	    },
-	    removeTodo: function removeTodo(index) {
-	      return dispatch((0, _actions.removeTodo)(index));
-	    },
-	    increaseQty: function increaseQty(id) {
-	      return dispatch((0, _actions.increaseQty)(id));
-	    },
-	    decreaseQty: function decreaseQty(id) {
-	      return dispatch((0, _actions.decreaseQty)(id));
+	    addItem: function addItem(item) {
+	      return dispatch((0, _actions.addItem)(item));
 	    }
 	  };
 	})(forms.MainForm);
@@ -38203,6 +38194,7 @@
 	  value: true
 	});
 	exports.addTodo = addTodo;
+	exports.addItem = addItem;
 	exports.toggleTodo = toggleTodo;
 	exports.removeTodo = removeTodo;
 	exports.increaseQty = increaseQty;
@@ -38221,6 +38213,19 @@
 	      text: text,
 	      price: 5,
 	      quantity: 1
+	    }
+	  };
+	}
+
+	function addItem(item) {
+	  return {
+	    type: 'ADD_ITEM',
+	    payload: {
+	      id: uid(),
+	      isDone: false,
+	      text: item.text,
+	      price: item.price,
+	      quantity: item.qty
 	    }
 	  };
 	}
@@ -38282,19 +38287,22 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function MainForm(props) {
-	  var todos = props.todos,
-	      toggleTodo = props.toggleTodo,
-	      addTodo = props.addTodo,
-	      removeTodo = props.removeTodo,
-	      increaseQty = props.increaseQty,
-	      decreaseQty = props.decreaseQty;
+
+	  // console.log('form props ', props)
+
+	  var addItem = props.addItem;
 
 
 	  var handleSubmit = function handleSubmit(val) {
 	    // Do anything you want with the form value
 	    console.log(val, ' brand ', val.brand);
-	    console.log('submit event');
-	    addTodo(val.name + ' ' + val.brand);
+	    console.log('submit this ', this);
+	    addItem({
+	      text: val.name,
+	      brand: val.brand,
+	      price: val.price,
+	      qty: val.qty
+	    });
 	  };
 
 	  var onSubmit = function onSubmit(event) {
@@ -38321,6 +38329,8 @@
 	    ),
 	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' }),
 	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.brand' }),
+	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.price' }),
+	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.qty' }),
 	    _react2.default.createElement(
 	      'button',
 	      null,
