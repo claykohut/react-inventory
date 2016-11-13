@@ -11,7 +11,7 @@ export function addItem(item) {
       id: uid(),
       text: item.text,
       brand: item.brand,
-      price: parseFloat(item.price),
+      price: item.price,
       quantity: parseInt(item.qty)
     }
   };

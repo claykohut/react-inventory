@@ -109,7 +109,7 @@ div#list {
 }
 
 .item-info span {
-  width: calc(25% - 8px);
+  width: 25%;
   float: left;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -117,7 +117,7 @@ div#list {
 
 .item-info .item-price,
 .item-info .item-qty {
-  text-align: center;
+  text-align: left;
 }
 
 .list__item .add-button,
@@ -139,9 +139,9 @@ div#list {
   color: #ff2300;
 }
 
-.list__item .qty-btn {
+/*.list__item .qty-btn {
   display: none;
-}
+}*/
 
 .list__item:hover .qty-btn {
   display: inline-block;

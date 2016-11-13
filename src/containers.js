@@ -4,7 +4,7 @@ import { addItem, removeItem, increaseQty, decreaseQty } from './actions';
 
 import { Control, Form, actions } from 'react-redux-form';
 
-import * as forms from './components/my-form-component';
+import * as forms from './components/form';
 
 
 export const InventoryList = connect(

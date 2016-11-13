@@ -61,13 +61,15 @@ export function InventoryList(props) {
               className='list__item'>
             <Todo todo={t.toJS()} />
 
-            <i className="fa fa-plus-circle add-button qty-btn" 
+            <div className="qty-control-wrap">
+              <i className="fa fa-plus-circle add-button qty-btn" 
                aria-hidden="true"
                onClick={incQty(t.get('id'))}></i>
                
-            <i className="fa fa-minus-circle minus-button qty-btn" 
+              <i className="fa fa-minus-circle minus-button qty-btn" 
                aria-hidden="true"
                onClick={decQty(t.get('id'))}></i>
+            </div>
 
             <i className="fa fa-times delete-button" 
                aria-hidden="true"

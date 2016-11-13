@@ -38007,9 +38007,9 @@
 
 	var _reactReduxForm = __webpack_require__(202);
 
-	var _myFormComponent = __webpack_require__(390);
+	var _form = __webpack_require__(390);
 
-	var forms = _interopRequireWildcard(_myFormComponent);
+	var forms = _interopRequireWildcard(_form);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -38163,12 +38163,16 @@
 	          { key: t.get('id'),
 	            className: 'list__item' },
 	          _react2.default.createElement(Todo, { todo: t.toJS() }),
-	          _react2.default.createElement('i', { className: 'fa fa-plus-circle add-button qty-btn',
-	            'aria-hidden': 'true',
-	            onClick: incQty(t.get('id')) }),
-	          _react2.default.createElement('i', { className: 'fa fa-minus-circle minus-button qty-btn',
-	            'aria-hidden': 'true',
-	            onClick: decQty(t.get('id')) }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'qty-control-wrap' },
+	            _react2.default.createElement('i', { className: 'fa fa-plus-circle add-button qty-btn',
+	              'aria-hidden': 'true',
+	              onClick: incQty(t.get('id')) }),
+	            _react2.default.createElement('i', { className: 'fa fa-minus-circle minus-button qty-btn',
+	              'aria-hidden': 'true',
+	              onClick: decQty(t.get('id')) })
+	          ),
 	          _react2.default.createElement('i', { className: 'fa fa-times delete-button',
 	            'aria-hidden': 'true',
 	            onClick: deleteItem(todos.indexOf(t)) })
@@ -38385,7 +38389,7 @@
 	      id: uid(),
 	      text: item.text,
 	      brand: item.brand,
-	      price: parseFloat(item.price),
+	      price: item.price,
 	      quantity: parseInt(item.qty)
 	    }
 	  };
@@ -38509,7 +38513,7 @@
 	        'Price:'
 	      ),
 	      _react2.default.createElement(_reactReduxForm.Control.text, { placeholder: 'Price', type: 'number',
-	        step: '1', min: '0', model: 'form.user.price' })
+	        min: '0', model: 'form.user.price' })
 	    ),
 	    _react2.default.createElement(
 	      'div',
