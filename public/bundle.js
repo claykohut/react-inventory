@@ -38269,18 +38269,31 @@
 	      resetForm = props.resetForm;
 
 
+	  var checkForm = function checkForm(val) {
+	    if (val.name.length > 0 && val.brand.length > 0 && val.price >= 0 && val.qty > 0) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  };
+
 	  var handleSubmit = function handleSubmit(val) {
 	    // Do anything you want with the form value
 	    // console.log('submit this ', this)
 
-	    addItem({
-	      text: val.name,
-	      brand: val.brand,
-	      price: val.price,
-	      qty: val.qty
-	    });
+	    if (checkForm(val)) {
+	      addItem({
+	        text: val.name,
+	        brand: val.brand,
+	        price: val.price,
+	        qty: val.qty
+	      });
 
-	    resetForm('user');
+	      resetForm('user');
+	    } else {
+	      console.log('form incomplete!');
+	      return false;
+	    }
 	  };
 
 	  var onSubmit = function onSubmit(event) {

@@ -8,18 +8,32 @@ export function MainForm(props) {
 
   const { addItem, resetForm } = props;
 
+  const checkForm = function(val){
+    if( val.name.length > 0 && val.brand.length > 0 && val.price >= 0 && val.qty > 0 ){
+      return true
+    } else {
+      return false
+    }
+  }
+
   const handleSubmit = function(val){
     // Do anything you want with the form value
    // console.log('submit this ', this)
 
-    addItem({ 
-      text: val.name,
-      brand: val.brand,
-      price: val.price,
-      qty: val.qty
-    });
+      if( checkForm(val) ){
+        addItem({ 
+          text: val.name,
+          brand: val.brand,
+          price: val.price,
+          qty: val.qty
+        });
 
-    resetForm('user')
+        resetForm('user')
+      } else {
+        console.log('form incomplete!')
+        return false
+      }
+      
   }
 
   const onSubmit = (event) => {
