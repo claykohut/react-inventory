@@ -38337,9 +38337,9 @@
 	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' }),
 	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.brand' }),
 	    _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
-	      step: '1', model: 'form.user.price' }),
+	      step: '1', min: '0', model: 'form.user.price' }),
 	    _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
-	      step: '1', model: 'form.user.qty' }),
+	      step: '1', min: '0', model: 'form.user.qty' }),
 	    _react2.default.createElement(
 	      'button',
 	      null,

@@ -41,9 +41,9 @@ export function MainForm(props) {
       <Control.text model="form.user.name" />
       <Control.text model="form.user.brand" />
       <Control.text type='number'
-          step='1' model="form.user.price" />
+          step='1' min="0" model="form.user.price" />
       <Control.text type='number'
-          step='1' model="form.user.qty" />
+          step='1' min="0" model="form.user.qty" />
       <button>Submit!</button>
 
     </Form>
