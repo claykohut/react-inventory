@@ -60,7 +60,7 @@ export function MainForm(props) {
         <Control.text type='number' placeholder="Quantity"
             step='1' min="0" model="form.user.qty" />
       </div>
-      <button>Submit!</button>
+      <button>Add Item</button>
 
     </Form>
   );

@@ -5,7 +5,7 @@ import { Control, Form } from 'react-redux-form';
 var NumberFormat = require('react-number-format');
 
 
-export function Todo(props) {
+export function ListItem(props) {
   const { todo } = props;
   return (
     <div className="item-info">
@@ -59,7 +59,7 @@ export function InventoryList(props) {
         {todos.map(t => (
           <li key={t.get('id')}
               className='list__item'>
-            <Todo todo={t.toJS()} />
+            <ListItem todo={t.toJS()} />
 
             <div className="qty-control-wrap">
               <i className="fa fa-plus-circle add-button qty-btn" 

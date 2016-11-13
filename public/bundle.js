@@ -38051,7 +38051,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Todo = Todo;
+	exports.ListItem = ListItem;
 	exports.PriceDisplay = PriceDisplay;
 	exports.InventoryList = InventoryList;
 
@@ -38065,7 +38065,7 @@
 
 	var NumberFormat = __webpack_require__(388);
 
-	function Todo(props) {
+	function ListItem(props) {
 	  var todo = props.todo;
 
 	  return _react2.default.createElement(
@@ -38162,7 +38162,7 @@
 	          'li',
 	          { key: t.get('id'),
 	            className: 'list__item' },
-	          _react2.default.createElement(Todo, { todo: t.toJS() }),
+	          _react2.default.createElement(ListItem, { todo: t.toJS() }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'qty-control-wrap' },
@@ -38529,7 +38529,7 @@
 	    _react2.default.createElement(
 	      'button',
 	      null,
-	      'Submit!'
+	      'Add Item'
 	    )
 	  );
 	}
