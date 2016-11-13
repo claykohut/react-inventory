@@ -15,6 +15,9 @@ export function addTodo(text) {
 }
 
 export function addItem(item) {
+
+  console.log('in action item ', item)
+
   return {
     type: 'ADD_ITEM',
     payload: {

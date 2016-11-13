@@ -38051,6 +38051,9 @@
 	  return {
 	    addItem: function addItem(item) {
 	      return dispatch((0, _actions.addItem)(item));
+	    },
+	    resetForm: function resetForm(model) {
+	      return dispatch(_reactReduxForm.actions.reset('form.user'));
 	    }
 	  };
 	})(forms.MainForm);
@@ -38218,6 +38221,9 @@
 	}
 
 	function addItem(item) {
+
+	  console.log('in action item ', item);
+
 	  return {
 	    type: 'ADD_ITEM',
 	    payload: {
@@ -38290,19 +38296,23 @@
 
 	  // console.log('form props ', props)
 
-	  var addItem = props.addItem;
+	  var addItem = props.addItem,
+	      resetForm = props.resetForm;
 
 
 	  var handleSubmit = function handleSubmit(val) {
 	    // Do anything you want with the form value
 	    console.log(val, ' brand ', val.brand);
-	    console.log('submit this ', this);
+	    console.log('reset form? ', resetForm);
+	    // console.log('submit this ', this)
 	    addItem({
 	      text: val.name,
 	      brand: val.brand,
 	      price: val.price,
 	      qty: val.qty
 	    });
+
+	    resetForm('user');
 	  };
 
 	  var onSubmit = function onSubmit(event) {

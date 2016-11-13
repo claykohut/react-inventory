@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import * as components from './components';
 import { addTodo, addItem, toggleTodo, removeTodo, increaseQty, decreaseQty } from './actions';
 
-import { Control, Form } from 'react-redux-form';
+import { Control, Form, actions } from 'react-redux-form';
 
 import * as forms from './components/my-form-component';
 
@@ -30,7 +30,8 @@ export const MainForm = connect(
   },
   function mapDispatchToProps(dispatch) {
     return {
-     addItem: item => dispatch(addItem(item))
+     addItem: item => dispatch(addItem(item)),
+     resetForm: model => dispatch(actions.reset('form.user'))
   };
   }
 )(forms.MainForm);

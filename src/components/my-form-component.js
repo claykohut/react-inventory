@@ -1,23 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Control, Form } from 'react-redux-form';
+import { Control, Form, actions } from 'react-redux-form';
 
 export function MainForm(props) {
 
  // console.log('form props ', props)
 
-  const { addItem } = props;
+  const { addItem, resetForm } = props;
 
   const handleSubmit = function(val){
     // Do anything you want with the form value
     console.log(val, ' brand ', val.brand);
-    console.log('submit this ', this)
+    console.log('reset form? ', resetForm)
+   // console.log('submit this ', this)
     addItem({ 
       text: val.name,
       brand: val.brand,
       price: val.price,
       qty: val.qty
     });
+
+    resetForm('user')
   }
 
   const onSubmit = (event) => {
