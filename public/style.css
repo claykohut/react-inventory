@@ -156,4 +156,13 @@ div#list {
     width: 100%;
   }
 
+  #form {
+    margin-bottom: 20px;
+  }
+
+  .total-price-wrap .total-price {
+    text-align: center;
+    width: 100%;
+  }
+
 }
