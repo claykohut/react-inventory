@@ -32956,6 +32956,7 @@
 
 		switch (action.type) {
 			case 'ADD_TODO':
+				console.log('adding.. ', action.payload);
 				return todos.push((0, _immutable.Map)(action.payload));
 			case 'TOGGLE_TODO':
 				return todos.map(function (t) {
@@ -38273,7 +38274,6 @@
 	    key: 'handleSubmit',
 	    value: function handleSubmit(val) {
 	      // Do anything you want with the form value
-
 	      console.log(val);
 	    }
 	  }, {

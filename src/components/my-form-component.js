@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Control, Form } from 'react-redux-form';
 
+
 class MyForm extends React.Component {
   handleSubmit(val) {
     // Do anything you want with the form value
@@ -21,4 +22,4 @@ class MyForm extends React.Component {
 }
 
 // No need to connect()!
-export default MyForm;
+export default MyForm 
