@@ -38224,8 +38224,8 @@
 	      id: uid(),
 	      isDone: false,
 	      text: item.text,
-	      price: item.price,
-	      quantity: item.qty
+	      price: parseInt(item.price),
+	      quantity: parseInt(item.qty)
 	    }
 	  };
 	}
