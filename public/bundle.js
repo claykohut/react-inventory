@@ -23191,34 +23191,63 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	exports.default = function () {
-	  var todos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : init;
-	  var action = arguments[1];
+		var todos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : init;
+		var action = arguments[1];
 
-	  switch (action.type) {
-	    case 'ADD_TODO':
-	      return todos.push((0, _immutable.Map)(action.payload));
-	    case 'TOGGLE_TODO':
-	      return todos.map(function (t) {
-	        if (t.get('id') === action.payload) {
-	          console.log('toggling.. ', action.payload);
-	          return t.update('isDone', function (isDone) {
-	            return !isDone;
-	          });
-	        } else {
-	          return t;
-	        }
-	      });
-	    case 'REMOVE_TODO':
-	      console.log('remove index? ', action.payload);
-	      var index = action.payload;
-	      return todos.splice(index, 1);
-	    default:
-	      return todos;
-	  }
+		switch (action.type) {
+			case 'ADD_TODO':
+				return todos.push((0, _immutable.Map)(action.payload));
+			case 'TOGGLE_TODO':
+				return todos.map(function (t) {
+					if (t.get('id') === action.payload) {
+						console.log('toggling.. ', action.payload);
+						return t.update('isDone', function (isDone) {
+							return !isDone;
+						});
+					} else {
+						return t;
+					}
+				});
+			case 'REMOVE_TODO':
+				console.log('remove index? ', action.payload);
+				var index = action.payload;
+				return todos.splice(index, 1);
+			case 'INCREASE_QTY':
+				console.log('do inc qty! ', action.payload);
+				return todos.map(function (t) {
+					if (t.get('id') === action.payload.id) {
+						console.log('toggling.. ', action.payload);
+						return t.update('quantity', function (quantity) {
+							quantity = quantity + action.payload.qty;
+							console.log('qty now ', quantity);
+							return quantity;
+						});
+					} else {
+						return t;
+					}
+				});
+			case 'DECREASE_QTY':
+				console.log('do dec qty!');
+				return todos.map(function (t) {
+					if (t.get('id') === action.payload.id && t.get('quantity') > 0) {
+						console.log('doing.. ', action.payload);
+						return t.update('quantity', function (quantity) {
+							quantity = quantity - action.payload.qty;
+							console.log('qty now ', quantity);
+							return quantity;
+						});
+					} else {
+						return t;
+					}
+				});
+			default:
+				console.log('doing default action..');
+				return todos;
+		}
 	};
 
 	var _immutable = __webpack_require__(203);
@@ -28242,6 +28271,12 @@
 	    },
 	    removeTodo: function removeTodo(index) {
 	      return dispatch((0, _actions.removeTodo)(index));
+	    },
+	    increaseQty: function increaseQty(id) {
+	      return dispatch((0, _actions.increaseQty)(id));
+	    },
+	    decreaseQty: function decreaseQty(id) {
+	      return dispatch((0, _actions.decreaseQty)(id));
 	    }
 	  };
 	})(components.TodoList);
@@ -28301,7 +28336,9 @@
 	  var todos = props.todos,
 	      toggleTodo = props.toggleTodo,
 	      addTodo = props.addTodo,
-	      removeTodo = props.removeTodo;
+	      removeTodo = props.removeTodo,
+	      increaseQty = props.increaseQty,
+	      decreaseQty = props.decreaseQty;
 
 
 	  var onSubmit = function onSubmit(event) {
@@ -28328,6 +28365,17 @@
 	    };
 	  };
 
+	  var incQty = function incQty(id) {
+	    return function (event) {
+	      return increaseQty(id);
+	    };
+	  };
+	  var decQty = function decQty(id) {
+	    return function (event) {
+	      return decreaseQty(id);
+	    };
+	  };
+
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'todo' },
@@ -28345,6 +28393,12 @@
 	          { key: t.get('id'),
 	            className: 'todo__item' },
 	          _react2.default.createElement(Todo, { todo: t.toJS() }),
+	          _react2.default.createElement('i', { className: 'fa fa-plus add-button',
+	            'aria-hidden': 'true',
+	            onClick: incQty(t.get('id')) }),
+	          _react2.default.createElement('i', { className: 'fa fa-minus minus-button',
+	            'aria-hidden': 'true',
+	            onClick: decQty(t.get('id')) }),
 	          _react2.default.createElement('i', { className: 'fa fa-times delete-button',
 	            'aria-hidden': 'true',
 	            onClick: deleteItem(todos.indexOf(t)) })
@@ -28366,6 +28420,8 @@
 	exports.addTodo = addTodo;
 	exports.toggleTodo = toggleTodo;
 	exports.removeTodo = removeTodo;
+	exports.increaseQty = increaseQty;
+	exports.decreaseQty = decreaseQty;
 	// succinct hack for generating passable unique ids
 	var uid = function uid() {
 	  return Math.random().toString(34).slice(2);
@@ -28378,7 +28434,8 @@
 	      id: uid(),
 	      isDone: false,
 	      text: text,
-	      price: 5
+	      price: 5,
+	      quantity: 1
 	    }
 	  };
 	}
@@ -28394,6 +28451,27 @@
 	  return {
 	    type: 'REMOVE_TODO',
 	    payload: id
+	  };
+	}
+
+	function increaseQty(id) {
+	  console.log('trying to do inc');
+	  return {
+	    type: 'INCREASE_QTY',
+	    payload: {
+	      id: id,
+	      qty: 1
+	    }
+	  };
+	}
+
+	function decreaseQty(id) {
+	  return {
+	    type: 'DECREASE_QTY',
+	    payload: {
+	      id: id,
+	      qty: 1
+	    }
 	  };
 	}
 

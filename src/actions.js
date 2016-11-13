@@ -8,7 +8,8 @@ export function addTodo(text) {
       id: uid(),
       isDone: false,
       text: text,
-      price: 5
+      price: 5,
+      quantity: 1
     }
   };
 }
@@ -24,5 +25,26 @@ export function removeTodo(id) {
   return {
     type: 'REMOVE_TODO',
     payload: id
+  }
+}
+
+export function increaseQty(id) {
+  console.log('trying to do inc')
+  return {
+    type: 'INCREASE_QTY',
+    payload: {
+      id: id,
+      qty: 1
+    }
+  }
+}
+
+export function decreaseQty(id) {
+  return {
+    type: 'DECREASE_QTY',
+     payload: {
+      id: id,
+      qty: 1
+    }
   }
 }
