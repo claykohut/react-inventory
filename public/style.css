@@ -157,12 +157,13 @@ div#list {
   }
 
   #form {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .total-price-wrap .total-price {
     text-align: center;
     width: 100%;
+    margin-bottom: 10px;
   }
 
 }

@@ -2,13 +2,16 @@ import React from 'react';
 
 import { Control, Form } from 'react-redux-form';
 
+var NumberFormat = require('react-number-format');
+
+
 export function Todo(props) {
   const { todo } = props;
   return (
     <div className="item-info">
       <span className="item-name">{todo.text}</span>
       <span className="item-brand">{todo.brand}</span>
-      <span className="item-price">{todo.price}</span>
+      <NumberFormat className="item-price" value={todo.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
       <span className="item-qty">{todo.quantity}</span>
     </div>
   );
@@ -20,11 +23,24 @@ export function PriceDisplay(props) {
   for(var x in todos){
     totalPrice += todos[x].price * todos[x].quantity
   }
-  return (
-    <div className="total-price-wrap">
-      <span className="total-price">Total: { totalPrice }</span>
-    </div>
-  );
+
+  if( ! totalPrice ){
+    totalPrice = 0.0
+  }
+
+  if( totalPrice > 0 ){
+    return (
+      <div className="total-price-wrap">
+        <span className="total-price">Total: <NumberFormat value={totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="total-price-wrap">
+        <span className="total-price">Total: $0</span>
+      </div>)
+  }
+  
 }
 
 export function InventoryList(props) {
