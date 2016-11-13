@@ -10,7 +10,7 @@ export function Todo(props) {
 }
 
 export function TodoList(props) {
-  const { todos, toggleTodo, addTodo } = props;
+  const { todos, toggleTodo, addTodo, removeTodo } = props;
 
   const onSubmit = (event) => {
     const input = event.target;
@@ -26,6 +26,8 @@ export function TodoList(props) {
 
   const toggleClick = id => event => toggleTodo(id);
 
+  const deleteItem = id => event => removeTodo(id);
+
   return (
     <div className='todo'>
       <input type='text'
@@ -35,9 +37,11 @@ export function TodoList(props) {
       <ul className='todo__list'>
         {todos.map(t => (
           <li key={t.get('id')}
-              className='todo__item'
-              onClick={toggleClick(t.get('id'))}>
+              className='todo__item'>
             <Todo todo={t.toJS()} />
+            <i className="fa fa-times delete-button" 
+               aria-hidden="true"
+               onClick={deleteItem(todos.indexOf(t))}></i>
           </li>
         ))}
       </ul>

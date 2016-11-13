@@ -23204,6 +23204,7 @@
 	    case 'TOGGLE_TODO':
 	      return todos.map(function (t) {
 	        if (t.get('id') === action.payload) {
+	          console.log('toggling.. ', action.payload);
 	          return t.update('isDone', function (isDone) {
 	            return !isDone;
 	          });
@@ -23211,6 +23212,10 @@
 	          return t;
 	        }
 	      });
+	    case 'REMOVE_TODO':
+	      console.log('remove index? ', action.payload);
+	      var index = action.payload;
+	      return todos.splice(index, 1);
 	    default:
 	      return todos;
 	  }
@@ -28234,6 +28239,9 @@
 	    },
 	    toggleTodo: function toggleTodo(id) {
 	      return dispatch((0, _actions.toggleTodo)(id));
+	    },
+	    removeTodo: function removeTodo(index) {
+	      return dispatch((0, _actions.removeTodo)(index));
 	    }
 	  };
 	})(components.TodoList);
@@ -28277,7 +28285,8 @@
 	function TodoList(props) {
 	  var todos = props.todos,
 	      toggleTodo = props.toggleTodo,
-	      addTodo = props.addTodo;
+	      addTodo = props.addTodo,
+	      removeTodo = props.removeTodo;
 
 
 	  var onSubmit = function onSubmit(event) {
@@ -28298,6 +28307,12 @@
 	    };
 	  };
 
+	  var deleteItem = function deleteItem(id) {
+	    return function (event) {
+	      return removeTodo(id);
+	    };
+	  };
+
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'todo' },
@@ -28312,9 +28327,11 @@
 	        return _react2.default.createElement(
 	          'li',
 	          { key: t.get('id'),
-	            className: 'todo__item',
-	            onClick: toggleClick(t.get('id')) },
-	          _react2.default.createElement(Todo, { todo: t.toJS() })
+	            className: 'todo__item' },
+	          _react2.default.createElement(Todo, { todo: t.toJS() }),
+	          _react2.default.createElement('i', { className: 'fa fa-times delete-button',
+	            'aria-hidden': 'true',
+	            onClick: deleteItem(todos.indexOf(t)) })
 	        );
 	      })
 	    )
@@ -28332,6 +28349,7 @@
 	});
 	exports.addTodo = addTodo;
 	exports.toggleTodo = toggleTodo;
+	exports.removeTodo = removeTodo;
 	// succinct hack for generating passable unique ids
 	var uid = function uid() {
 	  return Math.random().toString(34).slice(2);
@@ -28351,6 +28369,13 @@
 	function toggleTodo(id) {
 	  return {
 	    type: 'TOGGLE_TODO',
+	    payload: id
+	  };
+	}
+
+	function removeTodo(id) {
+	  return {
+	    type: 'REMOVE_TODO',
 	    payload: id
 	  };
 	}

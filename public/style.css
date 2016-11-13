@@ -42,3 +42,11 @@ html, body, input, button {
 .todo__button:hover {
   background: #B2D8FF;
 }
+
+.delete-button {
+  float: right;
+}
+
+.delete-button:hover {
+  opacity: .5;
+}

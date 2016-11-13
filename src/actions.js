@@ -18,3 +18,10 @@ export function toggleTodo(id) {
     payload: id
   }
 }
+
+export function removeTodo(id) {
+  return {
+    type: 'REMOVE_TODO',
+    payload: id
+  }
+}
