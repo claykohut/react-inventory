@@ -41,8 +41,10 @@ export function MainForm(props) {
       <label>Your name?</label>
       <Control.text model="form.user.name" />
       <Control.text model="form.user.brand" />
-      <Control.text model="form.user.price" />
-      <Control.text model="form.user.qty" />
+      <Control.text type='number'
+          step='1' model="form.user.price" />
+      <Control.text type='number'
+          step='1' model="form.user.qty" />
       <button>Submit!</button>
 
     </Form>
