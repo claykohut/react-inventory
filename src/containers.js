@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import * as components from './components';
 import { addTodo, toggleTodo, removeTodo, increaseQty, decreaseQty } from './actions';
 
-export const TodoList = connect(
+export const InventoryList = connect(
   function mapStateToProps(state) {
     return { todos: state };
   },
@@ -15,4 +15,4 @@ export const TodoList = connect(
      decreaseQty: id => dispatch(decreaseQty(id))
 	};
   }
-)(components.TodoList);
+)(components.InventoryList);

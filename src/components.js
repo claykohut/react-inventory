@@ -18,7 +18,7 @@ export function PriceDisplay(props) {
   return <span>{ totalPrice }</span>;
 }
 
-export function TodoList(props) {
+export function InventoryList(props) {
   const { todos, toggleTodo, addTodo, removeTodo, increaseQty, decreaseQty } = props;
 
   const onSubmit = (event) => {

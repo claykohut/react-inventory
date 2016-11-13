@@ -69,7 +69,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_containers.TodoList, null)
+	  _react2.default.createElement(_containers.InventoryList, null)
 	), document.getElementById('app'));
 
 /***/ },
@@ -28247,7 +28247,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.TodoList = undefined;
+	exports.InventoryList = undefined;
 
 	var _reactRedux = __webpack_require__(193);
 
@@ -28259,7 +28259,7 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var TodoList = exports.TodoList = (0, _reactRedux.connect)(function mapStateToProps(state) {
+	var InventoryList = exports.InventoryList = (0, _reactRedux.connect)(function mapStateToProps(state) {
 	  return { todos: state };
 	}, function mapDispatchToProps(dispatch) {
 	  return {
@@ -28279,7 +28279,7 @@
 	      return dispatch((0, _actions.decreaseQty)(id));
 	    }
 	  };
-	})(components.TodoList);
+	})(components.InventoryList);
 
 /***/ },
 /* 205 */
@@ -28292,7 +28292,7 @@
 	});
 	exports.Todo = Todo;
 	exports.PriceDisplay = PriceDisplay;
-	exports.TodoList = TodoList;
+	exports.InventoryList = InventoryList;
 
 	var _react = __webpack_require__(1);
 
@@ -28332,7 +28332,7 @@
 	  );
 	}
 
-	function TodoList(props) {
+	function InventoryList(props) {
 	  var todos = props.todos,
 	      toggleTodo = props.toggleTodo,
 	      addTodo = props.addTodo,
