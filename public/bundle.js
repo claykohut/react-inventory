@@ -64,10 +64,6 @@
 
 	var _containers = __webpack_require__(386);
 
-	var _myFormComponent = __webpack_require__(389);
-
-	var _myFormComponent2 = _interopRequireDefault(_myFormComponent);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialUser = { name: '' };
@@ -90,7 +86,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_myFormComponent2.default, null)
+	  _react2.default.createElement(_containers.MainForm, null)
 	), document.getElementById('form'));
 
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -38004,7 +38000,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.InventoryList = undefined;
+	exports.MainForm = exports.InventoryList = undefined;
 
 	var _reactRedux = __webpack_require__(193);
 
@@ -38013,6 +38009,12 @@
 	var components = _interopRequireWildcard(_components);
 
 	var _actions = __webpack_require__(388);
+
+	var _reactReduxForm = __webpack_require__(202);
+
+	var _myFormComponent = __webpack_require__(389);
+
+	var forms = _interopRequireWildcard(_myFormComponent);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -38039,6 +38041,29 @@
 	  };
 	})(components.InventoryList);
 
+	var MainForm = exports.MainForm = (0, _reactRedux.connect)(function mapStateToProps(state) {
+	  console.log('state ', state);
+	  return { form: state.form };
+	}, function mapDispatchToProps(dispatch) {
+	  return {
+	    addTodo: function addTodo(text) {
+	      return dispatch((0, _actions.addTodo)(text));
+	    },
+	    toggleTodo: function toggleTodo(id) {
+	      return dispatch((0, _actions.toggleTodo)(id));
+	    },
+	    removeTodo: function removeTodo(index) {
+	      return dispatch((0, _actions.removeTodo)(index));
+	    },
+	    increaseQty: function increaseQty(id) {
+	      return dispatch((0, _actions.increaseQty)(id));
+	    },
+	    decreaseQty: function decreaseQty(id) {
+	      return dispatch((0, _actions.decreaseQty)(id));
+	    }
+	  };
+	})(forms.MainForm);
+
 /***/ },
 /* 387 */
 /***/ function(module, exports, __webpack_require__) {
@@ -38055,6 +38080,8 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactReduxForm = __webpack_require__(202);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38245,6 +38272,8 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	exports.MainForm = MainForm;
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -38308,6 +38337,74 @@
 
 
 	exports.default = MyForm;
+	function MainForm(props) {
+	  var todos = props.todos,
+	      toggleTodo = props.toggleTodo,
+	      addTodo = props.addTodo,
+	      removeTodo = props.removeTodo,
+	      increaseQty = props.increaseQty,
+	      decreaseQty = props.decreaseQty;
+
+
+	  var handleSubmit = function handleSubmit(val) {
+	    // Do anything you want with the form value
+	    console.log(val);
+	    addTodo(val.name);
+	  };
+
+	  var onSubmit = function onSubmit(event) {
+	    var input = event.target;
+	    var text = input.value;
+	    var isEnterKey = event.which == 13;
+	    var isLongEnough = text.length > 0;
+
+	    if (isEnterKey && isLongEnough) {
+	      input.value = '';
+	      addTodo(text);
+	    }
+	  };
+
+	  var toggleClick = function toggleClick(id) {
+	    return function (event) {
+	      return toggleTodo(id);
+	    };
+	  };
+
+	  var deleteItem = function deleteItem(id) {
+	    return function (event) {
+	      return removeTodo(id);
+	    };
+	  };
+
+	  var incQty = function incQty(id) {
+	    return function (event) {
+	      return increaseQty(id);
+	    };
+	  };
+	  var decQty = function decQty(id) {
+	    return function (event) {
+	      return decreaseQty(id);
+	    };
+	  };
+
+	  return _react2.default.createElement(
+	    _reactReduxForm.Form,
+	    { model: 'form.user', onSubmit: function onSubmit(val) {
+	        return handleSubmit(val);
+	      } },
+	    _react2.default.createElement(
+	      'label',
+	      null,
+	      'Your name?'
+	    ),
+	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' }),
+	    _react2.default.createElement(
+	      'button',
+	      null,
+	      'Submit!'
+	    )
+	  );
+	}
 
 /***/ }
 /******/ ]);

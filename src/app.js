@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import { combineForms } from 'react-redux-form';
 
 import reducer from './reducer';
-import { InventoryList } from './containers';
+import { InventoryList, MainForm } from './containers';
 
-import MyForm from './components/my-form-component';
 
 const initialUser = { name: '' };
 
@@ -28,7 +27,7 @@ console.log(store)
 
 render(
   <Provider store={store}>
-    <MyForm />
+    <MainForm />
   </Provider>,
   document.getElementById('form')
 );
