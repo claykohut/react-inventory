@@ -36,40 +36,27 @@ export function MainForm(props) {
       
   }
 
-  const onSubmit = (event) => {
-    const input = event.target;
-    const text = input.value;
-    const isEnterKey = (event.which == 13);
-    const isLongEnough = text.length > 0;
-
-    if(isEnterKey && isLongEnough) {
-      input.value = '';
-      addTodo(text);
-    }
-  };
-
-
   return (
     <Form model="form.user" onSubmit={(val) => handleSubmit(val)}>
 
       <div className="form-row">
         <label>Name:</label>
-        <Control.text model="form.user.name" />
+        <Control.text placeholder="Item" model="form.user.name" />
       </div>
 
       <div className="form-row">
         <label>Brand:</label>
-        <Control.text model="form.user.brand" />
+        <Control.text placeholder="Brand" model="form.user.brand" />
       </div>
 
       <div className="form-row">
         <label>Price:</label>
-        <Control.text type='number'
+        <Control.text placeholder="Price" type='number'
           step='1' min="0" model="form.user.price" />
       </div>
       <div className="form-row">
         <label>Quantity:</label>
-        <Control.text type='number'
+        <Control.text type='number' placeholder="Quantity"
             step='1' min="0" model="form.user.qty" />
       </div>
       <button>Submit!</button>

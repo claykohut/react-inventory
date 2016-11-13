@@ -38014,13 +38014,9 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var InventoryList = exports.InventoryList = (0, _reactRedux.connect)(function mapStateToProps(state) {
-	  console.log('state ', state);
 	  return { todos: state.list };
 	}, function mapDispatchToProps(dispatch) {
 	  return {
-	    addTodo: function addTodo(text) {
-	      return dispatch((0, _actions.addTodo)(text));
-	    },
 	    removeItem: function removeItem(index) {
 	      return dispatch((0, _actions.removeItem)(index));
 	    },
@@ -38034,7 +38030,6 @@
 	})(components.InventoryList);
 
 	var MainForm = exports.MainForm = (0, _reactRedux.connect)(function mapStateToProps(state) {
-	  console.log('state ', state);
 	  return { form: state.form };
 	}, function mapDispatchToProps(dispatch) {
 	  return {
@@ -38071,19 +38066,30 @@
 	function Todo(props) {
 	  var todo = props.todo;
 
-	  if (todo.isDone) {
-	    return _react2.default.createElement(
-	      'strike',
-	      null,
-	      todo.text
-	    );
-	  } else {
-	    return _react2.default.createElement(
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'item-info' },
+	    _react2.default.createElement(
 	      'span',
-	      null,
+	      { className: 'item-name' },
 	      todo.text
-	    );
-	  }
+	    ),
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'item-brand' },
+	      todo.brand
+	    ),
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'item-price' },
+	      todo.price
+	    ),
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'item-qty' },
+	      todo.quantity
+	    )
+	  );
 	}
 
 	function PriceDisplay(props) {
@@ -38094,9 +38100,14 @@
 	    totalPrice += todos[x].price * todos[x].quantity;
 	  }
 	  return _react2.default.createElement(
-	    'span',
-	    null,
-	    totalPrice
+	    'div',
+	    { className: 'total-price-wrap' },
+	    _react2.default.createElement(
+	      'span',
+	      { className: 'total-price' },
+	      'Total: ',
+	      totalPrice
+	    )
 	  );
 	}
 
@@ -38106,18 +38117,6 @@
 	      increaseQty = props.increaseQty,
 	      decreaseQty = props.decreaseQty;
 
-
-	  var onSubmit = function onSubmit(event) {
-	    var input = event.target;
-	    var text = input.value;
-	    var isEnterKey = event.which == 13;
-	    var isLongEnough = text.length > 0;
-
-	    if (isEnterKey && isLongEnough) {
-	      input.value = '';
-	      //addTodo(text);
-	    }
-	  };
 
 	  var deleteItem = function deleteItem(id) {
 	    return function (event) {
@@ -38138,21 +38137,21 @@
 
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'todo' },
+	    { className: 'list' },
 	    _react2.default.createElement(PriceDisplay, { todos: todos.toJS() }),
 	    _react2.default.createElement(
 	      'ul',
-	      { className: 'todo__list' },
+	      { className: 'inventory__list' },
 	      todos.map(function (t) {
 	        return _react2.default.createElement(
 	          'li',
 	          { key: t.get('id'),
-	            className: 'todo__item' },
+	            className: 'list__item' },
 	          _react2.default.createElement(Todo, { todo: t.toJS() }),
-	          _react2.default.createElement('i', { className: 'fa fa-plus add-button',
+	          _react2.default.createElement('i', { className: 'fa fa-plus-circle add-button qty-btn',
 	            'aria-hidden': 'true',
 	            onClick: incQty(t.get('id')) }),
-	          _react2.default.createElement('i', { className: 'fa fa-minus minus-button',
+	          _react2.default.createElement('i', { className: 'fa fa-minus-circle minus-button qty-btn',
 	            'aria-hidden': 'true',
 	            onClick: decQty(t.get('id')) }),
 	          _react2.default.createElement('i', { className: 'fa fa-times delete-button',
@@ -38173,7 +38172,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.addTodo = addTodo;
 	exports.addItem = addItem;
 	exports.removeItem = removeItem;
 	exports.increaseQty = increaseQty;
@@ -38183,19 +38181,6 @@
 	  return Math.random().toString(34).slice(2);
 	};
 
-	function addTodo(text) {
-	  return {
-	    type: 'ADD_TODO',
-	    payload: {
-	      id: uid(),
-	      isDone: false,
-	      text: text,
-	      price: 5,
-	      quantity: 1
-	    }
-	  };
-	}
-
 	function addItem(item) {
 
 	  console.log('in action item ', item);
@@ -38204,8 +38189,8 @@
 	    type: 'ADD_ITEM',
 	    payload: {
 	      id: uid(),
-	      isDone: false,
 	      text: item.text,
+	      brand: item.brand,
 	      price: parseFloat(item.price),
 	      quantity: parseInt(item.qty)
 	    }
@@ -38296,18 +38281,6 @@
 	    }
 	  };
 
-	  var onSubmit = function onSubmit(event) {
-	    var input = event.target;
-	    var text = input.value;
-	    var isEnterKey = event.which == 13;
-	    var isLongEnough = text.length > 0;
-
-	    if (isEnterKey && isLongEnough) {
-	      input.value = '';
-	      addTodo(text);
-	    }
-	  };
-
 	  return _react2.default.createElement(
 	    _reactReduxForm.Form,
 	    { model: 'form.user', onSubmit: function onSubmit(val) {
@@ -38321,7 +38294,7 @@
 	        null,
 	        'Name:'
 	      ),
-	      _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' })
+	      _react2.default.createElement(_reactReduxForm.Control.text, { placeholder: 'Item', model: 'form.user.name' })
 	    ),
 	    _react2.default.createElement(
 	      'div',
@@ -38331,7 +38304,7 @@
 	        null,
 	        'Brand:'
 	      ),
-	      _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.brand' })
+	      _react2.default.createElement(_reactReduxForm.Control.text, { placeholder: 'Brand', model: 'form.user.brand' })
 	    ),
 	    _react2.default.createElement(
 	      'div',
@@ -38341,7 +38314,7 @@
 	        null,
 	        'Price:'
 	      ),
-	      _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
+	      _react2.default.createElement(_reactReduxForm.Control.text, { placeholder: 'Price', type: 'number',
 	        step: '1', min: '0', model: 'form.user.price' })
 	    ),
 	    _react2.default.createElement(
@@ -38352,7 +38325,7 @@
 	        null,
 	        'Quantity:'
 	      ),
-	      _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
+	      _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number', placeholder: 'Quantity',
 	        step: '1', min: '0', model: 'form.user.qty' })
 	    ),
 	    _react2.default.createElement(

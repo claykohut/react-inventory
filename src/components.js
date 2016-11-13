@@ -4,11 +4,14 @@ import { Control, Form } from 'react-redux-form';
 
 export function Todo(props) {
   const { todo } = props;
-  if(todo.isDone) {
-    return <strike>{todo.text}</strike>;
-  } else {
-    return <span>{todo.text}</span>;
-  }
+  return (
+    <div className="item-info">
+      <span className="item-name">{todo.text}</span>
+      <span className="item-brand">{todo.brand}</span>
+      <span className="item-price">{todo.price}</span>
+      <span className="item-qty">{todo.quantity}</span>
+    </div>
+  );
 }
 
 export function PriceDisplay(props) {
@@ -17,23 +20,15 @@ export function PriceDisplay(props) {
   for(var x in todos){
     totalPrice += todos[x].price * todos[x].quantity
   }
-  return <span>{ totalPrice }</span>;
+  return (
+    <div className="total-price-wrap">
+      <span className="total-price">Total: { totalPrice }</span>
+    </div>
+  );
 }
 
 export function InventoryList(props) {
   const { todos, removeItem, increaseQty, decreaseQty } = props;
-
-  const onSubmit = (event) => {
-    const input = event.target;
-    const text = input.value;
-    const isEnterKey = (event.which == 13);
-    const isLongEnough = text.length > 0;
-
-    if(isEnterKey && isLongEnough) {
-      input.value = '';
-      //addTodo(text);
-    }
-  };
 
   const deleteItem = id => event => removeItem(id);
 
@@ -41,20 +36,20 @@ export function InventoryList(props) {
   const decQty = id => event => decreaseQty(id);
 
   return (
-    <div className='todo'>
+    <div className='list'>
       <PriceDisplay todos={todos.toJS()} />
    
-      <ul className='todo__list'>
+      <ul className='inventory__list'>
         {todos.map(t => (
           <li key={t.get('id')}
-              className='todo__item'>
+              className='list__item'>
             <Todo todo={t.toJS()} />
 
-            <i className="fa fa-plus add-button" 
+            <i className="fa fa-plus-circle add-button qty-btn" 
                aria-hidden="true"
                onClick={incQty(t.get('id'))}></i>
                
-            <i className="fa fa-minus minus-button" 
+            <i className="fa fa-minus-circle minus-button qty-btn" 
                aria-hidden="true"
                onClick={decQty(t.get('id'))}></i>
 

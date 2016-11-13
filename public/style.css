@@ -1,25 +1,35 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html, body, input, button {
   font-family: Sawasdee;
   font-size: 20px;
 }
 
-.todo__list {
+.inventory__list {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-.todo__item {
-  padding: .5em .25em;
+.list__item {
+  padding: 24px 20px;
   border-bottom: solid 1px #eee;
+  float: left;
+  width: 100%;
+  position: relative;
 }
 
-.todo__item:hover {
+.list__item:hover {
   background: #f7f7f7;
   cursor: pointer;
 }
 
-.todo__entry {
+.list__entry {
   border: solid 1px #ccc;
   padding: .25em .5em;
   border-radius: .2em;
@@ -44,9 +54,106 @@ html, body, input, button {
 }
 
 .delete-button {
-  float: right;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate3d(0,-50%,0);
 }
 
 .delete-button:hover {
   opacity: .5;
+}
+
+
+div#form {
+    width: 30%;
+    float: left;
+}
+
+form > button {
+  width: 100%;
+  padding: 10px;
+  background: #0099CC;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.form-row input {
+    width: 100% !important;
+    padding: 0;
+}
+
+.form-row label {
+  display: none;
+}
+
+.form-row input {
+    width: 100%;
+    border-radius: 4px;
+    padding: 0;
+    outline: none;
+    border: 1px solid #e8e8e8;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.total-price-wrap .total-price {
+  float: right;
+}
+
+div#list {
+    width: 70%;
+    float: left;
+}
+
+.item-info span {
+  width: calc(25% - 8px);
+  float: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item-info .item-price,
+.item-info .item-qty {
+  text-align: center;
+}
+
+.list__item .add-button,
+.list__item .minus-button {
+  position: absolute;
+  right: calc(25% - 21px);
+  transform: translate3d(0,-50%,0);
+  font-size: 18px;
+}
+
+.list__item .add-button {
+  color: #00d41a;
+  top: calc(50% - 21px);
+  color: #00d41a;
+}
+
+.list__item .minus-button {
+  top: calc(50% + 21px);
+  color: #ff2300;
+}
+
+.list__item .qty-btn {
+  display: none;
+}
+
+.list__item:hover .qty-btn {
+  display: inline-block;
+}
+
+.list__item .qty-btn:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 550px){
+  div#form, div#list {
+    width: 100%;
+  }
+
 }
