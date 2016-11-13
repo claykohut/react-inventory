@@ -13,7 +13,7 @@ export function PriceDisplay(props) {
   const { todos } = props;
   var totalPrice = 0
   for(var x in todos){
-    totalPrice += todos[x].price
+    totalPrice += todos[x].price * todos[x].quantity
   }
   return <span>{ totalPrice }</span>;
 }

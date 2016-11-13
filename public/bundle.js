@@ -28323,7 +28323,7 @@
 
 	  var totalPrice = 0;
 	  for (var x in todos) {
-	    totalPrice += todos[x].price;
+	    totalPrice += todos[x].price * todos[x].quantity;
 	  }
 	  return _react2.default.createElement(
 	    'span',
