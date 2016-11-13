@@ -3,8 +3,6 @@ const uid = () => Math.random().toString(34).slice(2);
 
 export function addItem(item) {
 
-  console.log('in action item ', item)
-
   return {
     type: 'ADD_ITEM',
     payload: {
@@ -25,7 +23,7 @@ export function removeItem(id) {
 }
 
 export function increaseQty(id) {
-  console.log('trying to do inc')
+
   return {
     type: 'INCREASE_QTY',
     payload: {

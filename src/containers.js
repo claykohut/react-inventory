@@ -9,7 +9,7 @@ import * as forms from './components/form';
 
 export const InventoryList = connect(
   function mapStateToProps(state) {
-    return { todos: state.list };
+    return { items: state.list };
   },
   function mapDispatchToProps(dispatch) {
     return {

@@ -26,8 +26,6 @@ const store = createStore(combineReducers({
   }, 'form'),
 }));
 
-console.log(store)
-
 render(
   <Provider store={store}>
     <MainForm />

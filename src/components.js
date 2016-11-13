@@ -6,22 +6,22 @@ var NumberFormat = require('react-number-format');
 
 
 export function ListItem(props) {
-  const { todo } = props;
+  const { item } = props;
   return (
     <div className="item-info">
-      <span className="item-name">{todo.text}</span>
-      <span className="item-brand">{todo.brand}</span>
-      <NumberFormat className="item-price" value={todo.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-      <span className="item-qty">{todo.quantity}</span>
+      <span className="item-name">{item.text}</span>
+      <span className="item-brand">{item.brand}</span>
+      <NumberFormat className="item-price" value={item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+      <span className="item-qty">{item.quantity}</span>
     </div>
   );
 }
 
 export function PriceDisplay(props) {
-  const { todos } = props;
+  const { items } = props;
   var totalPrice = 0
-  for(var x in todos){
-    totalPrice += todos[x].price * todos[x].quantity
+  for(var x in items){
+    totalPrice += items[x].price * items[x].quantity
   }
 
   if( ! totalPrice ){
@@ -44,7 +44,7 @@ export function PriceDisplay(props) {
 }
 
 export function InventoryList(props) {
-  const { todos, removeItem, increaseQty, decreaseQty } = props;
+  const { items, removeItem, increaseQty, decreaseQty } = props;
 
   const deleteItem = id => event => removeItem(id);
 
@@ -53,13 +53,13 @@ export function InventoryList(props) {
 
   return (
     <div className='list'>
-      <PriceDisplay todos={todos.toJS()} />
+      <PriceDisplay items={items.toJS()} />
    
       <ul className='inventory__list'>
-        {todos.map(t => (
+        {items.map(t => (
           <li key={t.get('id')}
               className='list__item'>
-            <ListItem todo={t.toJS()} />
+            <ListItem item={t.toJS()} />
 
             <div className="qty-control-wrap">
               <i className="fa fa-plus-circle add-button qty-btn" 
@@ -73,7 +73,7 @@ export function InventoryList(props) {
 
             <i className="fa fa-times delete-button" 
                aria-hidden="true"
-               onClick={deleteItem(todos.indexOf(t))}></i>
+               onClick={deleteItem(items.indexOf(t))}></i>
           </li>
         ))}
       </ul>

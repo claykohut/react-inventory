@@ -84,8 +84,6 @@
 	  }, 'form')
 	}));
 
-	console.log(store);
-
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
@@ -32950,25 +32948,25 @@
 	});
 
 	exports.default = function () {
-		var todos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : init;
+		var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : init;
 		var action = arguments[1];
 
 		switch (action.type) {
 			case 'ADD_TODO':
-				console.log('adding.. ', action.payload);
-				return todos.push((0, _immutable.Map)(action.payload));
+				//console.log('adding.. ', action.payload)
+				return items.push((0, _immutable.Map)(action.payload));
 			case 'REMOVE_ITEM':
-				console.log('remove index? ', action.payload);
+				//console.log('remove index? ', action.payload)
 				var index = action.payload;
-				return todos.splice(index, 1);
+				return items.splice(index, 1);
 			case 'INCREASE_QTY':
-				console.log('do inc qty! ', action.payload);
-				return todos.map(function (t) {
+				//console.log('do inc qty! ', action.payload)
+				return items.map(function (t) {
 					if (t.get('id') === action.payload.id) {
-						console.log('toggling.. ', action.payload);
+
 						return t.update('quantity', function (quantity) {
 							quantity = quantity + action.payload.qty;
-							console.log('qty now ', quantity);
+							//console.log('qty now ', quantity)
 							return quantity;
 						});
 					} else {
@@ -32976,13 +32974,12 @@
 					}
 				});
 			case 'DECREASE_QTY':
-				console.log('do dec qty!');
-				return todos.map(function (t) {
+				//console.log('do dec qty!')
+				return items.map(function (t) {
 					if (t.get('id') === action.payload.id && t.get('quantity') > 0) {
-						console.log('doing.. ', action.payload);
+
 						return t.update('quantity', function (quantity) {
 							quantity = quantity - action.payload.qty;
-							console.log('qty now ', quantity);
 							return quantity;
 						});
 					} else {
@@ -32990,11 +32987,11 @@
 					}
 				});
 			case 'ADD_ITEM':
-				console.log('adding item.. ', action.payload);
-				return todos.push((0, _immutable.Map)(action.payload));
+				//console.log('adding item.. ', action.payload)
+				return items.push((0, _immutable.Map)(action.payload));
 			default:
-				console.log('doing default action..');
-				return todos;
+				//console.log('doing default action..')
+				return items;
 		}
 	};
 
@@ -38014,7 +38011,7 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var InventoryList = exports.InventoryList = (0, _reactRedux.connect)(function mapStateToProps(state) {
-	  return { todos: state.list };
+	  return { items: state.list };
 	}, function mapDispatchToProps(dispatch) {
 	  return {
 	    removeItem: function removeItem(index) {
@@ -38066,7 +38063,7 @@
 	var NumberFormat = __webpack_require__(388);
 
 	function ListItem(props) {
-	  var todo = props.todo;
+	  var item = props.item;
 
 	  return _react2.default.createElement(
 	    'div',
@@ -38074,28 +38071,28 @@
 	    _react2.default.createElement(
 	      'span',
 	      { className: 'item-name' },
-	      todo.text
+	      item.text
 	    ),
 	    _react2.default.createElement(
 	      'span',
 	      { className: 'item-brand' },
-	      todo.brand
+	      item.brand
 	    ),
-	    _react2.default.createElement(NumberFormat, { className: 'item-price', value: todo.price, displayType: 'text', thousandSeparator: true, prefix: '$' }),
+	    _react2.default.createElement(NumberFormat, { className: 'item-price', value: item.price, displayType: 'text', thousandSeparator: true, prefix: '$' }),
 	    _react2.default.createElement(
 	      'span',
 	      { className: 'item-qty' },
-	      todo.quantity
+	      item.quantity
 	    )
 	  );
 	}
 
 	function PriceDisplay(props) {
-	  var todos = props.todos;
+	  var items = props.items;
 
 	  var totalPrice = 0;
-	  for (var x in todos) {
-	    totalPrice += todos[x].price * todos[x].quantity;
+	  for (var x in items) {
+	    totalPrice += items[x].price * items[x].quantity;
 	  }
 
 	  if (!totalPrice) {
@@ -38127,7 +38124,7 @@
 	}
 
 	function InventoryList(props) {
-	  var todos = props.todos,
+	  var items = props.items,
 	      removeItem = props.removeItem,
 	      increaseQty = props.increaseQty,
 	      decreaseQty = props.decreaseQty;
@@ -38153,16 +38150,16 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'list' },
-	    _react2.default.createElement(PriceDisplay, { todos: todos.toJS() }),
+	    _react2.default.createElement(PriceDisplay, { items: items.toJS() }),
 	    _react2.default.createElement(
 	      'ul',
 	      { className: 'inventory__list' },
-	      todos.map(function (t) {
+	      items.map(function (t) {
 	        return _react2.default.createElement(
 	          'li',
 	          { key: t.get('id'),
 	            className: 'list__item' },
-	          _react2.default.createElement(ListItem, { todo: t.toJS() }),
+	          _react2.default.createElement(ListItem, { item: t.toJS() }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'qty-control-wrap' },
@@ -38175,7 +38172,7 @@
 	          ),
 	          _react2.default.createElement('i', { className: 'fa fa-times delete-button',
 	            'aria-hidden': 'true',
-	            onClick: deleteItem(todos.indexOf(t)) })
+	            onClick: deleteItem(items.indexOf(t)) })
 	        );
 	      })
 	    )
@@ -38381,8 +38378,6 @@
 
 	function addItem(item) {
 
-	  console.log('in action item ', item);
-
 	  return {
 	    type: 'ADD_ITEM',
 	    payload: {
@@ -38403,7 +38398,7 @@
 	}
 
 	function increaseQty(id) {
-	  console.log('trying to do inc');
+
 	  return {
 	    type: 'INCREASE_QTY',
 	    payload: {
@@ -38445,9 +38440,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function MainForm(props) {
-
-	  // console.log('form props ', props)
-
 	  var addItem = props.addItem,
 	      resetForm = props.resetForm;
 
@@ -38461,8 +38453,6 @@
 	  };
 
 	  var handleSubmit = function handleSubmit(val) {
-	    // Do anything you want with the form value
-	    // console.log('submit this ', this)
 
 	    if (checkForm(val)) {
 	      addItem({

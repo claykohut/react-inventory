@@ -5,8 +5,6 @@ import { Control, Form, actions } from 'react-redux-form';
 
 export function MainForm(props) {
 
- // console.log('form props ', props)
-
   const { addItem, resetForm } = props;
 
   const checkForm = function(val){
@@ -18,8 +16,6 @@ export function MainForm(props) {
   }
 
   const handleSubmit = function(val){
-    // Do anything you want with the form value
-   // console.log('submit this ', this)
 
       if( checkForm(val) ){
         addItem({ 
