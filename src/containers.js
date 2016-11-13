@@ -4,7 +4,8 @@ import { addTodo, toggleTodo, removeTodo, increaseQty, decreaseQty } from './act
 
 export const InventoryList = connect(
   function mapStateToProps(state) {
-    return { todos: state };
+    console.log('state ', state)
+    return { todos: state.list };
   },
   function mapDispatchToProps(dispatch) {
     return {

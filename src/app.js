@@ -1,15 +1,41 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import { combineForms } from 'react-redux-form';
+
 import reducer from './reducer';
 import { InventoryList } from './containers';
 
-const store = createStore(reducer);
+import MyForm from './components/my-form-component';
+
+const initialUser = { name: '' };
+
+// const formStore = createStore(combineForms({
+//   user: initialUser,
+// }));
+
+//const store = createStore(reducer)
+
+const store = createStore(combineReducers({
+  list: reducer,
+  form: combineForms({
+    user: initialUser
+  }, 'form'),
+}));
+
+console.log(store)
+
+render(
+  <Provider store={store}>
+    <MyForm />
+  </Provider>,
+  document.getElementById('form')
+);
 
 render(
   <Provider store={store}>
     <InventoryList />
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('list')
 );

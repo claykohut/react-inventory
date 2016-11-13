@@ -1,0 +1,24 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { Control, Form } from 'react-redux-form';
+
+class MyForm extends React.Component {
+  handleSubmit(val) {
+    // Do anything you want with the form value
+    console.log(val);
+  }
+
+
+  render() {
+    return (
+      <Form model="form.user" onSubmit={(val) => this.handleSubmit(val)}>
+        <label>Your name?</label>
+        <Control.text model="form.user.name" />
+        <button>Submit!</button>
+      </Form>
+    );
+  }
+}
+
+// No need to connect()!
+export default MyForm;
