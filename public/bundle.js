@@ -28256,6 +28256,7 @@
 	  value: true
 	});
 	exports.Todo = Todo;
+	exports.PriceDisplay = PriceDisplay;
 	exports.TodoList = TodoList;
 
 	var _react = __webpack_require__(1);
@@ -28280,6 +28281,20 @@
 	      todo.text
 	    );
 	  }
+	}
+
+	function PriceDisplay(props) {
+	  var todos = props.todos;
+
+	  var totalPrice = 0;
+	  for (var x in todos) {
+	    totalPrice += todos[x].price;
+	  }
+	  return _react2.default.createElement(
+	    'span',
+	    null,
+	    totalPrice
+	  );
 	}
 
 	function TodoList(props) {
@@ -28316,6 +28331,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'todo' },
+	    _react2.default.createElement(PriceDisplay, { todos: todos.toJS() }),
 	    _react2.default.createElement('input', { type: 'text',
 	      className: 'todo__entry',
 	      placeholder: 'Add todo',
@@ -28361,7 +28377,8 @@
 	    payload: {
 	      id: uid(),
 	      isDone: false,
-	      text: text
+	      text: text,
+	      price: 5
 	    }
 	  };
 	}

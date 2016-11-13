@@ -9,6 +9,15 @@ export function Todo(props) {
   }
 }
 
+export function PriceDisplay(props) {
+  const { todos } = props;
+  var totalPrice = 0
+  for(var x in todos){
+    totalPrice += todos[x].price
+  }
+  return <span>{ totalPrice }</span>;
+}
+
 export function TodoList(props) {
   const { todos, toggleTodo, addTodo, removeTodo } = props;
 
@@ -30,6 +39,7 @@ export function TodoList(props) {
 
   return (
     <div className='todo'>
+      <PriceDisplay todos={todos.toJS()} />
       <input type='text'
              className='todo__entry'
              placeholder='Add todo'

@@ -7,7 +7,8 @@ export function addTodo(text) {
     payload: {
       id: uid(),
       isDone: false,
-      text: text
+      text: text,
+      price: 5
     }
   };
 }
