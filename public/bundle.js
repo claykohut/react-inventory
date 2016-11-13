@@ -38301,16 +38301,47 @@
 	        return handleSubmit(val);
 	      } },
 	    _react2.default.createElement(
-	      'label',
-	      null,
-	      'Your name?'
+	      'div',
+	      { className: 'form-row' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Name:'
+	      ),
+	      _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' })
 	    ),
-	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.name' }),
-	    _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.brand' }),
-	    _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
-	      step: '1', min: '0', model: 'form.user.price' }),
-	    _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
-	      step: '1', min: '0', model: 'form.user.qty' }),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'form-row' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Brand:'
+	      ),
+	      _react2.default.createElement(_reactReduxForm.Control.text, { model: 'form.user.brand' })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'form-row' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Price:'
+	      ),
+	      _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
+	        step: '1', min: '0', model: 'form.user.price' })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'form-row' },
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        'Quantity:'
+	      ),
+	      _react2.default.createElement(_reactReduxForm.Control.text, { type: 'number',
+	        step: '1', min: '0', model: 'form.user.qty' })
+	    ),
 	    _react2.default.createElement(
 	      'button',
 	      null,

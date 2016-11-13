@@ -37,13 +37,27 @@ export function MainForm(props) {
 
   return (
     <Form model="form.user" onSubmit={(val) => handleSubmit(val)}>
-      <label>Your name?</label>
-      <Control.text model="form.user.name" />
-      <Control.text model="form.user.brand" />
-      <Control.text type='number'
+
+      <div className="form-row">
+        <label>Name:</label>
+        <Control.text model="form.user.name" />
+      </div>
+
+      <div className="form-row">
+        <label>Brand:</label>
+        <Control.text model="form.user.brand" />
+      </div>
+
+      <div className="form-row">
+        <label>Price:</label>
+        <Control.text type='number'
           step='1' min="0" model="form.user.price" />
-      <Control.text type='number'
-          step='1' min="0" model="form.user.qty" />
+      </div>
+      <div className="form-row">
+        <label>Quantity:</label>
+        <Control.text type='number'
+            step='1' min="0" model="form.user.qty" />
+      </div>
       <button>Submit!</button>
 
     </Form>
