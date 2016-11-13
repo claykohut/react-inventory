@@ -38117,7 +38117,6 @@
 	function InventoryList(props) {
 	  var todos = props.todos,
 	      toggleTodo = props.toggleTodo,
-	      addTodo = props.addTodo,
 	      removeTodo = props.removeTodo,
 	      increaseQty = props.increaseQty,
 	      decreaseQty = props.decreaseQty;
@@ -38131,7 +38130,7 @@
 
 	    if (isEnterKey && isLongEnough) {
 	      input.value = '';
-	      addTodo(text);
+	      //addTodo(text);
 	    }
 	  };
 
@@ -38162,10 +38161,6 @@
 	    'div',
 	    { className: 'todo' },
 	    _react2.default.createElement(PriceDisplay, { todos: todos.toJS() }),
-	    _react2.default.createElement('input', { type: 'text',
-	      className: 'todo__entry',
-	      placeholder: 'Add todo',
-	      onKeyDown: onSubmit }),
 	    _react2.default.createElement(
 	      'ul',
 	      { className: 'todo__list' },

@@ -21,7 +21,7 @@ export function PriceDisplay(props) {
 }
 
 export function InventoryList(props) {
-  const { todos, toggleTodo, addTodo, removeTodo, increaseQty, decreaseQty } = props;
+  const { todos, toggleTodo, removeTodo, increaseQty, decreaseQty } = props;
 
   const onSubmit = (event) => {
     const input = event.target;
@@ -31,7 +31,7 @@ export function InventoryList(props) {
 
     if(isEnterKey && isLongEnough) {
       input.value = '';
-      addTodo(text);
+      //addTodo(text);
     }
   };
 
@@ -45,10 +45,7 @@ export function InventoryList(props) {
   return (
     <div className='todo'>
       <PriceDisplay todos={todos.toJS()} />
-      <input type='text'
-             className='todo__entry'
-             placeholder='Add todo'
-             onKeyDown={onSubmit} />
+   
       <ul className='todo__list'>
         {todos.map(t => (
           <li key={t.get('id')}
