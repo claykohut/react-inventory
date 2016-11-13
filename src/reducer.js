@@ -7,16 +7,7 @@ export default function(todos=init, action) {
     case 'ADD_TODO':
     	console.log('adding.. ', action.payload)
 		return todos.push(Map(action.payload));
-    case 'TOGGLE_TODO':
-       return todos.map(t => {
-		 	if(t.get('id') === action.payload) {
-		 		console.log('toggling.. ', action.payload)
-		 		return t.update('isDone', isDone => !isDone);
-			} else {
-				return t;
-			}
-		})
-    case 'REMOVE_TODO':
+    case 'REMOVE_ITEM':
 	   console.log('remove index? ', action.payload)
        var index = action.payload
        return todos.splice(index, 1)

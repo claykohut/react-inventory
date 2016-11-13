@@ -21,7 +21,7 @@ export function PriceDisplay(props) {
 }
 
 export function InventoryList(props) {
-  const { todos, toggleTodo, removeTodo, increaseQty, decreaseQty } = props;
+  const { todos, removeItem, increaseQty, decreaseQty } = props;
 
   const onSubmit = (event) => {
     const input = event.target;
@@ -35,9 +35,7 @@ export function InventoryList(props) {
     }
   };
 
-  const toggleClick = id => event => toggleTodo(id);
-
-  const deleteItem = id => event => removeTodo(id);
+  const deleteItem = id => event => removeItem(id);
 
   const incQty = id => event => increaseQty(id);
   const decQty = id => event => decreaseQty(id);

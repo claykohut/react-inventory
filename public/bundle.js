@@ -32957,18 +32957,7 @@
 			case 'ADD_TODO':
 				console.log('adding.. ', action.payload);
 				return todos.push((0, _immutable.Map)(action.payload));
-			case 'TOGGLE_TODO':
-				return todos.map(function (t) {
-					if (t.get('id') === action.payload) {
-						console.log('toggling.. ', action.payload);
-						return t.update('isDone', function (isDone) {
-							return !isDone;
-						});
-					} else {
-						return t;
-					}
-				});
-			case 'REMOVE_TODO':
+			case 'REMOVE_ITEM':
 				console.log('remove index? ', action.payload);
 				var index = action.payload;
 				return todos.splice(index, 1);
@@ -38032,11 +38021,8 @@
 	    addTodo: function addTodo(text) {
 	      return dispatch((0, _actions.addTodo)(text));
 	    },
-	    toggleTodo: function toggleTodo(id) {
-	      return dispatch((0, _actions.toggleTodo)(id));
-	    },
-	    removeTodo: function removeTodo(index) {
-	      return dispatch((0, _actions.removeTodo)(index));
+	    removeItem: function removeItem(index) {
+	      return dispatch((0, _actions.removeItem)(index));
 	    },
 	    increaseQty: function increaseQty(id) {
 	      return dispatch((0, _actions.increaseQty)(id));
@@ -38116,8 +38102,7 @@
 
 	function InventoryList(props) {
 	  var todos = props.todos,
-	      toggleTodo = props.toggleTodo,
-	      removeTodo = props.removeTodo,
+	      removeItem = props.removeItem,
 	      increaseQty = props.increaseQty,
 	      decreaseQty = props.decreaseQty;
 
@@ -38134,15 +38119,9 @@
 	    }
 	  };
 
-	  var toggleClick = function toggleClick(id) {
-	    return function (event) {
-	      return toggleTodo(id);
-	    };
-	  };
-
 	  var deleteItem = function deleteItem(id) {
 	    return function (event) {
-	      return removeTodo(id);
+	      return removeItem(id);
 	    };
 	  };
 
@@ -38196,8 +38175,7 @@
 	});
 	exports.addTodo = addTodo;
 	exports.addItem = addItem;
-	exports.toggleTodo = toggleTodo;
-	exports.removeTodo = removeTodo;
+	exports.removeItem = removeItem;
 	exports.increaseQty = increaseQty;
 	exports.decreaseQty = decreaseQty;
 	// succinct hack for generating passable unique ids
@@ -38234,16 +38212,9 @@
 	  };
 	}
 
-	function toggleTodo(id) {
+	function removeItem(id) {
 	  return {
-	    type: 'TOGGLE_TODO',
-	    payload: id
-	  };
-	}
-
-	function removeTodo(id) {
-	  return {
-	    type: 'REMOVE_TODO',
+	    type: 'REMOVE_ITEM',
 	    payload: id
 	  };
 	}

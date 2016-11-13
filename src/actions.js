@@ -30,16 +30,9 @@ export function addItem(item) {
   };
 }
 
-export function toggleTodo(id) {
+export function removeItem(id) {
   return {
-    type: 'TOGGLE_TODO',
-    payload: id
-  }
-}
-
-export function removeTodo(id) {
-  return {
-    type: 'REMOVE_TODO',
+    type: 'REMOVE_ITEM',
     payload: id
   }
 }

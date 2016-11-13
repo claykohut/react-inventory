@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as components from './components';
-import { addTodo, addItem, toggleTodo, removeTodo, increaseQty, decreaseQty } from './actions';
+import { addTodo, addItem, removeItem, increaseQty, decreaseQty } from './actions';
 
 import { Control, Form, actions } from 'react-redux-form';
 
@@ -15,8 +15,7 @@ export const InventoryList = connect(
   function mapDispatchToProps(dispatch) {
     return {
 	   addTodo: text => dispatch(addTodo(text)),
-	   toggleTodo: id => dispatch(toggleTodo(id)),
-	   removeTodo: index => dispatch(removeTodo(index)),
+	   removeItem: index => dispatch(removeItem(index)),
      increaseQty: id => dispatch(increaseQty(id)),
      decreaseQty: id => dispatch(decreaseQty(id))
 	};
